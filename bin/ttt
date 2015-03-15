@@ -1,0 +1,12 @@
+#!/usr/bin/env ruby
+
+require File.expand_path(File.join(File.dirname(__FILE__), '..', 'lib', 'tic_tac_toe'))
+
+ttt = TicTacToe.new(STDOUT)
+
+ttt.start!
+
+result = nil
+while result != TicTacToe::GameOver
+  result = ttt.input(STDIN.gets)
+end
