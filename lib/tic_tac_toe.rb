@@ -20,7 +20,7 @@ class TicTacToe
     3   |   |   |   |
         +---+---+---+
 
-Where do you want to move?"
+Where do you want to move?
 END
     )
   end
