@@ -10,6 +10,11 @@ describe 'Tic-tac-toe' do
     ttt.start!
   end
 
+  def type(user_input)
+    @last_output_position = output.pos
+    ttt.input(user_input)
+  end
+
   def response
     output.pos = @last_output_position
     result = output.gets(nil) # nil ensures we don't stop reading when we hit a newline.
@@ -20,7 +25,7 @@ describe 'Tic-tac-toe' do
   it 'plays a first move' do
     start_game
     expect(response).to eq("Which player do you want to be? X or O?\n")
-    ttt.input('O')
+    type('O')
     expect(response).to eq(
 <<-END
           A   B   C
