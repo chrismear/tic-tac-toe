@@ -145,5 +145,29 @@ END
   end
 
 
-  it 'finishes the game when there is a draw'
+  it 'finishes the game when there is a draw' do
+    # User is playing as O
+    # Current board is:
+    # X O
+    # X O
+    # O X O
+    # User is to play next.
+    make_game_in_progress(:o, [:x, :o, nil, :x, :o, nil, :o, :x, :o])
+    type('C2')
+    expect(response).to eq(
+<<-END
+          A   B   C
+
+        +---+---+---+
+    1   | X | O | X |
+        +---+---+---+
+    2   | X | O | O |
+        +---+---+---+
+    3   | O | X | O |
+        +---+---+---+
+
+It's a draw!
+END
+    )
+  end
 end

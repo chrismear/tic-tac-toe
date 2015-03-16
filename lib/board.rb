@@ -46,4 +46,9 @@ class Board
     raise ArgumentError unless [:x, :o].include?(mark)
     @board[column][row] = mark
   end
+
+  # Returns true if every space on the board has a mark.
+  def full?
+    !board.flatten.include?(nil)
+  end
 end

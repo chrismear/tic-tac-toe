@@ -22,16 +22,24 @@ class TicTacToe
       choose_player(user_input)
     else
       play_user_turn(user_input)
-      if game_over?
+      if (verdict = game_over?)
         draw_board
-        @output << "\nYou have won!\n"
+        if verdict == :draw
+          @output << "\nIt's a draw!\n"
+        else
+          @output << "\nYou have won!\n"
+        end
         return GameOver
       end
 
       play_computer_turn
-      if game_over?
+      if (verdict = game_over?)
         draw_board
-        @output << "\nI have won!\n"
+        if verdict == :draw
+          @output << "\nIt's a draw!\n"
+        else
+          @output << "\nI have won!\n"
+        end
         return GameOver
       end
 
@@ -63,7 +71,11 @@ class TicTacToe
       end
     end
     # If we reach here, no line is in a winning state.
-    return nil
+    if @board.full?
+      return :draw
+    else
+      return nil
+    end
   end
 
   def choose_player(user_input)
