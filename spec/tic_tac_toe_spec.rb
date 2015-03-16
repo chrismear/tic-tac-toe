@@ -79,6 +79,7 @@ END
     )
   end
 
+  it 'complains when the user makes an invalid move'
   it 'finishes the game when the user wins'
   it 'finishes the game when the computer wins'
   it 'finishes the game when there is a draw'
