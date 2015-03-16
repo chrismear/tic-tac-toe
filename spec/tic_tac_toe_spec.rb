@@ -117,6 +117,33 @@ END
     )
   end
 
-  it 'finishes the game when the computer wins'
+  it 'finishes the game when the computer wins' do
+    # User is playing as X
+    # Current board is:
+    # O O
+    #  
+    # X X
+    # User is to play next.
+    make_game_in_progress(:x, [:o, :o, nil, nil, nil, nil, :x, :x, nil])
+    # Let the computer win.
+    type('A2')
+    expect(response).to eq(
+<<-END
+          A   B   C
+
+        +---+---+---+
+    1   | O | O | O |
+        +---+---+---+
+    2   | X |   |   |
+        +---+---+---+
+    3   | X | X |   |
+        +---+---+---+
+
+I have won!
+END
+    )
+  end
+
+
   it 'finishes the game when there is a draw'
 end

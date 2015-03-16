@@ -27,7 +27,14 @@ class TicTacToe
         @output << "\nYou have won!\n"
         return GameOver
       end
+
       play_computer_turn
+      if game_over?
+        draw_board
+        @output << "\nI have won!\n"
+        return GameOver
+      end
+
       draw_board
       prompt_for_turn
     end
