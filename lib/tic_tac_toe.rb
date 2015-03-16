@@ -98,5 +98,9 @@ END
     @output << board_output
   end
 
+  def update_board(board_shorthand)
+    @board = Board.new(board_shorthand)
+  end
+
   class GameOver; end
 end

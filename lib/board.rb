@@ -1,10 +1,18 @@
 class Board
-  def initialize
-    @board = [
-      [nil, nil, nil],
-      [nil, nil, nil],
-      [nil, nil, nil]
-    ]
+  def initialize(board_shorthand=nil)
+    if board_shorthand
+      @board = [
+        [board_shorthand[0], board_shorthand[3], board_shorthand[6]],
+        [board_shorthand[1], board_shorthand[4], board_shorthand[7]],
+        [board_shorthand[2], board_shorthand[5], board_shorthand[8]]
+      ]
+    else
+      @board = [
+        [nil, nil, nil],
+        [nil, nil, nil],
+        [nil, nil, nil]
+      ]
+    end
   end
 
   attr_reader :board
