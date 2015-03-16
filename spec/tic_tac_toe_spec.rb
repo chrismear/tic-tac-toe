@@ -43,6 +43,42 @@ END
     )
   end
 
+  it 'allows the user to play the first move' do
+    start_game
+    type('X')
+    expect(response).to eq(
+<<-END
+          A   B   C
+
+        +---+---+---+
+    1   |   |   |   |
+        +---+---+---+
+    2   |   |   |   |
+        +---+---+---+
+    3   |   |   |   |
+        +---+---+---+
+
+Where do you want to move?
+END
+    )
+    type('A1')
+    expect(response).to eq(
+<<-END
+          A   B   C
+
+        +---+---+---+
+    1   | X | O |   |
+        +---+---+---+
+    2   |   |   |   |
+        +---+---+---+
+    3   |   |   |   |
+        +---+---+---+
+
+Where do you want to move?
+END
+    )
+  end
+
 
 
 end
