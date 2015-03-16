@@ -22,9 +22,41 @@ class TicTacToe
       choose_player(user_input)
     else
       play_user_turn(user_input)
+      if game_over?
+        draw_board
+        @output << "\nYou have won!\n"
+        return GameOver
+      end
       play_computer_turn
       draw_board
+      prompt_for_turn
     end
+  end
+
+  def game_over?
+    all_lines = [
+      # columns
+      [[0,0], [0,1], [0,2]],
+      [[1,0], [1,1], [1,2]],
+      [[2,0], [2,1], [2,2]],
+      # rows
+      [[0,0], [1,0], [2,0]],
+      [[0,1], [1,1], [2,1]],
+      [[0,2], [1,2], [2,2]],
+      # diagonals
+      [[0,0], [1,1], [2,2]],
+      [[0,2], [1,1], [2,0]]
+    ].each do |line|
+      # Look up what marks exist on the board along this line:
+      marks_on_line = line.map{|column_row| @board.mark_at(*column_row)}
+      if marks_on_line == [:x, :x, :x]
+        return :x
+      elsif marks_on_line == [:o, :o, :o]
+        return :o
+      end
+    end
+    # If we reach here, no line is in a winning state.
+    return nil
   end
 
   def choose_player(user_input)
@@ -33,17 +65,24 @@ class TicTacToe
       @computer_player = :o
       @state = :playing
       draw_board
+      prompt_for_turn
     elsif user_input == 'o' || user_input == 'O' || user_input == '0'
       @user_player = :o
       @computer_player = :x
       @state = :playing
       play_computer_turn
       draw_board
+      prompt_for_turn
     else
       @output.puts("Which player do you want to be? X or O?\n")
     end
   end
 
+  def prompt_for_turn
+    @output << "\nWhere do you want to move?\n"
+  end
+
+  # Takes the user input, and places their move into the board.
   def play_user_turn(user_input)
     column = case user_input.chars[0]
     when 'a', 'A'
@@ -70,6 +109,8 @@ class TicTacToe
     end
   end
 
+  # Thinks hard about the current board state, chooses a move to make, and
+  # places it into the board.
   def play_computer_turn
     # TODO Make this smarter; current implementation simply plays in the first available space.
     (0..2).each do |row|
@@ -96,7 +137,6 @@ END
     board_output << "        +---+---+---+\n"
     board_output << "    3   | #{@board.character_at(0,2)} | #{@board.character_at(1,2)} | #{@board.character_at(2,2)} |\n"
     board_output << "        +---+---+---+\n"
-    board_output << "\nWhere do you want to move?\n"
     @output << board_output
   end
 

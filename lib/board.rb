@@ -30,6 +30,11 @@ class Board
     end
   end
 
+  # Returns the mark at the given column and row
+  def mark_at(column, row)
+    @board[column][row]
+  end
+
   # Returns true if the board is empty at the given column and row.
   def empty_at?(column, row)
     @board[column][row].nil?

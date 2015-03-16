@@ -90,7 +90,33 @@ END
   end
 
   it 'complains when the user makes an invalid move'
-  it 'finishes the game when the user wins'
+
+  it 'finishes the game when the user wins' do
+    # User is playing as X
+    # Current board is:
+    # X O O
+    #   X
+    # 
+    # User is to play next.
+    make_game_in_progress(:x, [:x, :o, :o, nil, :x, nil, nil, nil, nil])
+    type('C3')
+    expect(response).to eq(
+<<-END
+          A   B   C
+
+        +---+---+---+
+    1   | X | O | O |
+        +---+---+---+
+    2   |   | X |   |
+        +---+---+---+
+    3   |   |   | X |
+        +---+---+---+
+
+You have won!
+END
+    )
+  end
+
   it 'finishes the game when the computer wins'
   it 'finishes the game when there is a draw'
 end
