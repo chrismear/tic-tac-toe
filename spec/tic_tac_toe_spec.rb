@@ -22,6 +22,16 @@ describe 'Tic-tac-toe' do
     result
   end
 
+  # board takes an array of :x, :o and nil to indicate the current position of the board,
+  # It is assumed that the user is to play next, and you must pass an :x or an :o
+  # to the player_mark argument to indicate which mark the user is playing with.
+  # e.g. make_game_in_progress(:x, [nil, nil, nil, :x, :o, :x, :o, nil nil])
+  def make_game_in_progress(player_mark, board_shorthand)
+    ttt.update_board(board_shorthand)
+    ttt.user_player = player_mark
+    ttt.state = :playing
+  end
+
   it 'plays a first move' do
     start_game
     expect(response).to eq("Which player do you want to be? X or O?\n")
