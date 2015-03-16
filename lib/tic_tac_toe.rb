@@ -104,5 +104,16 @@ END
     @board = Board.new(board_shorthand)
   end
 
+  def user_player=(user_mark)
+    case user_mark
+    when :x
+      @user_player = :x
+      @computer_player = :o
+    when :o
+      @user_player = :o
+      @computer_player = :x
+    end
+  end
+
   class GameOver; end
 end
