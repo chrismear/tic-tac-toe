@@ -1,6 +1,8 @@
 require File.join(File.dirname(__FILE__), 'board')
 
 class TicTacToe
+  attr_accessor :state
+
   def initialize(output)
     @output = output
     @board = Board.new
